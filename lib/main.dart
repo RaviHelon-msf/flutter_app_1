@@ -46,15 +46,31 @@ class MyAppState extends ChangeNotifier {
 }
 // ...
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  bool isNavBarOpen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      appBar: AppBar(title: Text('Mestre Tung'), actions: [
+        IconButton(
+            onPressed: () {
+              setState(() {
+                isNavBarOpen = !isNavBarOpen;
+              });
+            },
+            icon: Icon(isNavBarOpen ? Icons.close : Icons.menu))
+      ]),
+      body: Row(
         children: [
-          SafeArea(
+          AnimatedContainer(
+            duration: Duration(microseconds: 300),
+            width: isNavBarOpen ? 200 : 56,
             child: NavigationRail(
-              extended: false,
               destinations: [
                 NavigationRailDestination(
                   icon: Icon(Icons.home),
