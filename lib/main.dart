@@ -1,6 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/widgets.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,14 +12,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final myColorScheme = ColorScheme(
+      brightness: Brightness.light,
+      primary: Color(0xffF5F5DC), // Your primary color
+      secondary: Color(0xFFCFB997), // Your secondary color
+      surface: Color(0xFFE1C699), // Background surface color
+      background: Color(0xFFE1C699), // App background color
+      error: Colors.red, // Error color
+      onPrimary: Colors.black, // Text and icons on primary color
+      onSecondary: Color(0xff964B00), // Text and icons on secondary color
+      onSurface: Color(0xFF964B00), // Text and icons on surface color
+      onBackground: Colors.black, // Text and icons on background color
+      onError: Colors.white, // Text and icons on error color
+    );
+
+    final myTheme = ThemeData(
+      useMaterial3: true,
+      colorScheme: myColorScheme, // Apply your custom color scheme
+      primaryColor: myColorScheme.primary, // Primary color for the app
+      // Define other theme properties like text styles, fonts, etc.
+    );
+
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
         title: 'Namer App',
-        theme: ThemeData(
-          useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xffcfb997)),
-        ),
+        theme: myTheme,
         home: MyHomePage(),
       ),
     );
@@ -56,37 +75,77 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Mestre Tung'), actions: [
-        IconButton(
-            onPressed: () {
-              setState(() {
-                isNavBarOpen = !isNavBarOpen;
-              });
-            },
-            icon: Icon(isNavBarOpen ? Icons.close : Icons.menu))
-      ]),
+      appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          title: Text(
+            'Mestre Tung',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSecondary,
+            ),
+          )),
+      drawer: Drawer(
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        child: Container(
+          width: 200,
+          child: Column(
+            children: <Widget>[
+              Container(
+                height: MediaQuery.of(context)
+                    .size
+                    .height, // Set a height constraint
+                child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: <Widget>[
+                    Center(
+                      child: Text(
+                        'Mestre Tung',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        'Início',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 25,
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text('Pesquisa'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.5),
+                    ListTile(
+                      title: Text('Perfil'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                    ListTile(
+                      title: Text('Sobre nós'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Row(
         children: [
-          AnimatedContainer(
-            duration: Duration(microseconds: 300),
-            width: isNavBarOpen ? 200 : 56,
-            child: NavigationRail(
-              destinations: [
-                NavigationRailDestination(
-                  icon: Icon(Icons.home),
-                  label: Text('Menu'),
-                ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.favorite),
-                  label: Text('Account Circle'),
-                ),
-              ],
-              selectedIndex: 0,
-              onDestinationSelected: (value) {
-                print('selected: $value');
-              },
-            ),
-          ),
           Expanded(
             child: Container(
               color: Theme.of(context).colorScheme.primaryContainer,
