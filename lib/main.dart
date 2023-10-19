@@ -1,7 +1,8 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/widgets.dart';
+
+const String myAppTitle = "Mestre Tung";
 
 void main() {
   runApp(MyApp());
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => MyAppState(),
       child: MaterialApp(
-        title: 'Namer App',
+        title: myAppTitle,
         theme: myTheme,
         home: MyHomePage(),
       ),
@@ -77,73 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.secondary,
-          title: Text(
-            'Mestre Tung',
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSecondary,
+          title: Center(
+            child: Text(
+              myAppTitle,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
             ),
           )),
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        child: Container(
-          width: 200,
-          child: Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context)
-                    .size
-                    .height, // Set a height constraint
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    Center(
-                      child: Text(
-                        'Mestre Tung',
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    ListTile(
-                      title: Text(
-                        'Início',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.onSurface,
-                          fontSize: 25,
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Pesquisa'),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.height * 0.5),
-                    ListTile(
-                      title: Text('Perfil'),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                    ListTile(
-                      title: Text('Sobre nós'),
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: DrawerWidget(),
       body: Row(
         children: [
           Expanded(
@@ -153,6 +96,98 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class DrawerWidget extends StatelessWidget {
+  const DrawerWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      child: SizedBox(
+        width: 200,
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height:
+                  MediaQuery.of(context).size.height, // Set a height constraint
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(
+                      child: Text(
+                        myAppTitle,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                  ListTile(
+                    title: Container(
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        width: 1.0,
+                      ))),
+                      padding: EdgeInsets.only(bottom: 12.0),
+                      margin: EdgeInsets.all(0),
+                      child: Text(
+                        'Início',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                          fontSize: 26,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      'Pesquisa',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 26,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.65),
+                  ListTile(
+                    title: Text(
+                      'Sobre',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontSize: 26,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
