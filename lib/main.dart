@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
+
 import 'my_drawer_widget.dart';
 
 const String myAppTitle = "Mestre Tung";
@@ -46,8 +49,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyAppState extends ChangeNotifier {}
-// ...
+class MyAppState extends ChangeNotifier {
+  Map<String, dynamic> jsonData = {}; // Store the JSON data here
+
+  Future<void> loadJsonData() async {
+    try {
+      String jsonDataString =
+          await rootBundle.loadString('assets/data/pontos.json');
+      jsonData = json.decode(jsonDataString);
+      // Notify listeners if you need to update the UI when data is loaded.
+      notifyListeners();
+    } catch (e) {
+      print('Error loading JSON data: $e');
+    }
+  }
+}
 
 class MyHomePage extends StatefulWidget {
   @override
@@ -55,9 +71,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Map<String, dynamic> jsonData = {}; // Store the JSON data here
   bool isNavBarOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Access the instance of MyAppState created by the ChangeNotifierProvider
+    Provider.of<MyAppState>(context, listen: false).loadJsonData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final myAppState = Provider.of<MyAppState>(context);
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -80,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
+          Text(myAppState.jsonData["chi-hu"]["explication"])
         ],
       ),
     );

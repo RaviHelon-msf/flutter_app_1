@@ -1,0 +1,53 @@
+{
+    "chi-hu": {
+        "explication": "Ch'i: Sete Hu: Tigre",
+        "localization": "Estes três pontos estão localizados ao longo da diáfise distal da fibula",
+        "anatomia": [
+            "Nervo Cutâneo Sural Externo",
+            "Dermátomo S1",
+            "Área reflexa do peito e ossos"
+        ],
+        "indication": [
+            "Dor no esterno (Esternodinia)",
+            "Dor na escápula (Escapulalgia)",
+            "Dor na clavícula",
+            "Pleurite"
+        ],
+        "preparation": "Paciente em decúbito dorsal; procurar primeiro a extremidade posterior da fibula, em seguida medir 2, 4 e 6 tsuns acima da ponta do maléolo externo.",
+        "procedure": "Inserir 0,5 a 0,8 Tsun. Normalmente observe que os três pontos são aplicados em conjunto."
+    },
+    "zong-san": {
+        "explication": "Zong: ancestral San: três",
+        "localization": "Este ponto está localizado 1 tsun acima da linha superior do maléolo medial, no terço superior da tíbia.",
+        "anatomia": [
+            "Nervo Cutâneo Sural Interno",
+            "Dermátomo L3",
+            "Área reflexa do abdômen e intestinos"
+        ],
+        "indication": [
+            "Dor abdominal",
+            "Distúrbios intestinais",
+            "Hérnia inguinal",
+            "Inchaço na região inguinal"
+        ],
+        "preparation": "Paciente em decúbito dorsal; localize a linha superior do maléolo medial e meça 1 tsun acima dela.",
+        "procedure": "Inserir 0,5 a 0,8 Tsun. Este ponto pode ser combinado com outros pontos de acordo com o diagnóstico."
+    },
+    "zhong-xing": {
+        "explication": "Zhong: central Xing: andar",
+        "localization": "Este ponto está localizado 3 tsuns acima da linha superior do maléolo medial, no terço superior da tíbia.",
+        "anatomia": [
+            "Nervo Cutâneo Femoral Lateral",
+            "Dermátomo L2",
+            "Área reflexa dos órgãos genitais"
+        ],
+        "indication": [
+            "Dor lombar",
+            "Dor na virilha",
+            "Distúrbios dos órgãos genitais",
+            "Infertilidade"
+        ],
+        "preparation": "Paciente em decúbito dorsal; localize a linha superior do maléolo medial e meça 3 tsuns acima dela.",
+        "procedure": "Inserir 0,5 a 0,8 Tsun. Este ponto é muitas vezes combinado com outros pontos para tratar condições relacionadas aos órgãos genitais."
+    }
+}
