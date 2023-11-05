@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          Text(myAppState.jsonData["chi-hu"]["explication"])
+          Text(myAppState.jsonData["chi-hu"]['explication'])
         ],
       ),
     );
