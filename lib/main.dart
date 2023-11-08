@@ -5,8 +5,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
 import 'my_drawer_widget.dart';
+import 'my_cont_page.dart';
 
-const String myAppTitle = "Mestre Tung";
+const String myAppTitle = 'Mestre Tung';
 
 void main() {
   runApp(MyApp());
@@ -71,20 +72,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Map<String, dynamic> jsonData = {}; // Store the JSON data here
   bool isNavBarOpen = false;
 
   @override
-  void initState() {
-    super.initState();
-    // Access the instance of MyAppState created by the ChangeNotifierProvider
-    Provider.of<MyAppState>(context, listen: false).loadJsonData();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final myAppState = Provider.of<MyAppState>(context);
-
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -106,8 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Image.asset('assets/body.png'),
               ),
             ),
-          ),
-          Text(myAppState.jsonData["chi-hu"]['explication'])
+          )
         ],
       ),
     );
