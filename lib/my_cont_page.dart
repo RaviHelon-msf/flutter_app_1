@@ -6,9 +6,31 @@ import 'main.dart';
 
 const String myAppTitle = "Mestre Tung";
 
+const String myTestInput = "chi-hu";
+
 class MyContPage extends StatefulWidget {
   @override
   State<MyContPage> createState() => _MyContPageState();
+}
+
+Widget buildTextWithTags(String tag, String text) {
+  return Column(
+    children: [
+      SizedBox(height: 16),
+      Text(
+        tag,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 18, // Adjust the font size as needed
+        ),
+      ),
+      Text(
+        text,
+        style: TextStyle(fontSize: 16), // Adjust the font size as needed
+      ),
+      SizedBox(height: 16), // Adjust the spacing as needed
+    ],
+  );
 }
 
 class _MyContPageState extends State<MyContPage> {
@@ -38,15 +60,32 @@ class _MyContPageState extends State<MyContPage> {
             ),
           )),
       drawer: MyDrawerWidget(),
-      body: Row(
-        children: [
-          Text(myAppState.jsonData["chi-hu"]?['explication']),
-          Text(myAppState.jsonData["chi-hu"]?['localization']),
-          Text(myAppState.jsonData["chi-hu"]?['anatomia'][0]),
-          Text(myAppState.jsonData["chi-hu"]?['indication'][0]),
-          Text(myAppState.jsonData["chi-hu"]?['preparation']),
-          Text(myAppState.jsonData["chi-hu"]?['procedure'])
-        ],
+      body: Center(
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Text(
+              myTestInput,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: 24, // Adjust the font size as needed
+              ),
+            ),
+            SizedBox(height: 20),
+            buildTextWithTags("Explicação:",
+                myAppState.jsonData[myTestInput]?['explication']),
+            buildTextWithTags("Localização:",
+                myAppState.jsonData[myTestInput]?['localization']),
+            buildTextWithTags(
+                "Anatomia:", myAppState.jsonData[myTestInput]?['anatomia'][0]),
+            buildTextWithTags("Indicações:",
+                myAppState.jsonData[myTestInput]?['indication'][0]),
+            buildTextWithTags("Preparação:",
+                myAppState.jsonData[myTestInput]?['preparation']),
+            buildTextWithTags("Procedimento:",
+                myAppState.jsonData[myTestInput]?['procedure']),
+          ],
+        ),
       ),
     );
   }
