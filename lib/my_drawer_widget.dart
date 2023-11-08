@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'my_cont_page.dart';
+import 'main.dart';
+
 const String myAppTitle = "Mestre Tung";
 
 class MyDrawerWidget extends StatelessWidget {
@@ -54,7 +57,9 @@ class MyDrawerWidget extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MyHomePage()),
+                      );
                     },
                   ),
                   ListTile(
@@ -77,7 +82,9 @@ class MyDrawerWidget extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MyContPage()),
+                      );
                     },
                   ),
                   ListTile(
