@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import 'my_drawer_widget.dart';
 import 'my_cont_page.dart';
+import 'my_points_class.dart';
 
 const String myAppTitle = 'Mestre Tung';
 

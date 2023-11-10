@@ -1,5 +1,7 @@
 {
     "chi-hu": {
+        "id" : 1,
+        "name" : "chi-hu",
         "explication": "Ch'i: Sete Hu: Tigre",
         "localization": "Estes três pontos estão localizados ao longo da diáfise distal da fibula",
         "anatomia": [
@@ -17,6 +19,8 @@
         "procedure": "Inserir 0,5 a 0,8 Tsun. Normalmente observe que os três pontos são aplicados em conjunto."
     },
     "zong-san": {
+        "id" : 2, 
+        "name": "zong-san",
         "explication": "Zong: ancestral San: três",
         "localization": "Este ponto está localizado 1 tsun acima da linha superior do maléolo medial, no terço superior da tíbia.",
         "anatomia": [
