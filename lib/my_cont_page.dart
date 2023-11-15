@@ -9,6 +9,10 @@ const String myAppTitle = "Mestre Tung";
 const String myTestInput = "chi-hu";
 
 class MyContPage extends StatefulWidget {
+  final String myTestInput;
+
+  MyContPage({this.myTestInput = 'chi-hu'});
+
   @override
   State<MyContPage> createState() => _MyContPageState();
 }
@@ -48,6 +52,12 @@ class _MyContPageState extends State<MyContPage> {
   Widget build(BuildContext context) {
     final myAppState = Provider.of<MyAppState>(context);
 
+    // ignore: unnecessary_null_comparison
+    if (myAppState == null) {
+      // Handle the case when myAppState is null, e.g., show a loading indicator
+      return CircularProgressIndicator();
+    }
+
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -65,7 +75,7 @@ class _MyContPageState extends State<MyContPage> {
           children: [
             SizedBox(height: 20),
             Text(
-              myTestInput,
+              widget.myTestInput,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 24, // Adjust the font size as needed
@@ -73,17 +83,17 @@ class _MyContPageState extends State<MyContPage> {
             ),
             SizedBox(height: 20),
             buildTextWithTags("Explicação:",
-                myAppState.jsonData[myTestInput]?['explication']),
+                myAppState.jsonData?[widget.myTestInput]?['explication']),
             buildTextWithTags("Localização:",
-                myAppState.jsonData[myTestInput]?['localization']),
-            buildTextWithTags(
-                "Anatomia:", myAppState.jsonData[myTestInput]?['anatomia'][0]),
+                myAppState.jsonData?[widget.myTestInput]?['localization']),
+            buildTextWithTags("Anatomia:",
+                myAppState.jsonData?[widget.myTestInput]?['anatomia']?[0]),
             buildTextWithTags("Indicações:",
-                myAppState.jsonData[myTestInput]?['indication'][0]),
+                myAppState.jsonData?[widget.myTestInput]?['indication']?[0]),
             buildTextWithTags("Preparação:",
-                myAppState.jsonData[myTestInput]?['preparation']),
+                myAppState.jsonData?[widget.myTestInput]?['preparation']),
             buildTextWithTags("Procedimento:",
-                myAppState.jsonData[myTestInput]?['procedure']),
+                myAppState.jsonData?[widget.myTestInput]?['procedure']),
           ],
         ),
       ),

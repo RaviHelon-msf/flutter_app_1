@@ -38,6 +38,8 @@
         "procedure": "Inserir 0,5 a 0,8 Tsun. Este ponto pode ser combinado com outros pontos de acordo com o diagnóstico."
     },
     "zhong-xing": {
+        "id" : 3,
+        "name" : "zhong-xing",
         "explication": "Zhong: central Xing: andar",
         "localization": "Este ponto está localizado 3 tsuns acima da linha superior do maléolo medial, no terço superior da tíbia.",
         "anatomia": [

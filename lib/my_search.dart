@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
+import 'my_cont_page.dart';
+
 class MySearchPage extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _MySearchPageState createState() => _MySearchPageState();
 }
 
@@ -31,20 +34,21 @@ class AcupuncturePoint {
 
   factory AcupuncturePoint.fromJson(Map<String, dynamic> json) {
     return AcupuncturePoint(
-      id: json['id'],
-      name: json['name'],
-      explication: json['explication'],
-      localization: json['localization'],
-      anatomy: List<String>.from(json['anatomy']),
-      indication: List<String>.from(json['indication']),
-      preparation: json['preparation'],
-      procedure: json['procedure'],
+      id: json['id'] ?? 0, // Provide a default value for id if it's null
+      name: json['name'] ?? '', // Provide a default value for name if it's null
+      explication: json['explication'] ?? '',
+      localization: json['localization'] ?? '',
+      anatomy: (json['anatomy'] as List<dynamic>?)?.cast<String>() ?? [],
+      indication: (json['indication'] as List<dynamic>?)?.cast<String>() ?? [],
+      preparation: json['preparation'] ?? '',
+      procedure: json['procedure'] ?? '',
     );
   }
 }
 
 Future<List<AcupuncturePoint>> loadJsonData() async {
   String data = await rootBundle.loadString('assets/data/pontos.json');
+
   Map<String, dynamic> jsonData = json.decode(data);
 
   List<AcupuncturePoint> allPoints = jsonData.entries
@@ -66,28 +70,33 @@ class _MySearchPageState extends State<MySearchPage> {
       setState(() {
         allAcupuncturePoints = data;
         searchResults = data;
+        search("", "name");
       });
     });
   }
 
   void search(String query, String searchBy) {
     setState(() {
-      searchResults = allAcupuncturePoints.where((acupuncturePoint) {
-        switch (searchBy) {
-          case 'name':
-            return acupuncturePoint.name
-                .toLowerCase()
-                .contains(query.toLowerCase());
-          case 'anatomy':
-            return acupuncturePoint.anatomy.any(
-                (item) => item.toLowerCase().contains(query.toLowerCase()));
-          case 'indication':
-            return acupuncturePoint.indication.any(
-                (item) => item.toLowerCase().contains(query.toLowerCase()));
-          default:
-            return false;
-        }
-      }).toList();
+      if (query.isEmpty) {
+        searchResults = allAcupuncturePoints;
+      } else {
+        searchResults = allAcupuncturePoints.where((acupuncturePoint) {
+          switch (searchBy) {
+            case 'name':
+              return acupuncturePoint.name
+                  .toLowerCase()
+                  .contains(query.toLowerCase());
+            case 'anatomy':
+              return acupuncturePoint.anatomy.any(
+                  (item) => item.toLowerCase().contains(query.toLowerCase()));
+            case 'indication':
+              return acupuncturePoint.indication.any(
+                  (item) => item.toLowerCase().contains(query.toLowerCase()));
+            default:
+              return false;
+          }
+        }).toList();
+      }
     });
   }
 
@@ -110,23 +119,23 @@ class _MySearchPageState extends State<MySearchPage> {
                     hintText: 'Enter search term',
                   ),
                 ),
-                DropdownButton<String>(
-                  value: selectedSearchCriteria,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedSearchCriteria = value!;
-                    });
-                  },
-                  items: ['name', 'anatomy', 'indication']
-                      .map<DropdownMenuItem<String>>(
-                    (String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    },
-                  ).toList(),
-                ),
+                // DropdownButton<String>(
+                //   value: selectedSearchCriteria,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       selectedSearchCriteria = value!;
+                //     });
+                //   },
+                // items: ['name', 'anatomy', 'indication']
+                //     .map<DropdownMenuItem<String>>(
+                //   (String value) {
+                //     return DropdownMenuItem<String>(
+                //       value: value,
+                //       child: Text(value),
+                //     );
+                //   },
+                // ).toList(),
+                //),
               ],
             ),
           ),
@@ -134,8 +143,21 @@ class _MySearchPageState extends State<MySearchPage> {
             child: ListView.builder(
               itemCount: searchResults.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(searchResults[index].name),
+                return ElevatedButton(
+                  onPressed: () {
+                    // Navigate to AcupuncturePointDetails when the button is pressed
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MyContPage(
+                          myTestInput: searchResults[index].name,
+                        ),
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(searchResults[index].name),
+                  ),
                 );
               },
             ),
