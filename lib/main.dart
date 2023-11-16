@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
@@ -65,6 +67,12 @@ class MyAppState extends ChangeNotifier {
       print('Error loading JSON data: $e');
     }
   }
+
+  Future<void> saveJsonData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String jsonString = json.encode(jsonData);
+    prefs.setString('myJsonData', jsonString);
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -74,6 +82,12 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isNavBarOpen = false;
+
+  @override
+  void dispose() {
+    context.read<MyAppState>().saveJsonData();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

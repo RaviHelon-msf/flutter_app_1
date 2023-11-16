@@ -13,6 +13,7 @@ class MySearchPage extends StatefulWidget {
 
 class AcupuncturePoint {
   final int id;
+  final bool fav;
   final String name;
   final String explication;
   final String localization;
@@ -23,6 +24,7 @@ class AcupuncturePoint {
 
   AcupuncturePoint({
     required this.id,
+    required this.fav,
     required this.name,
     required this.explication,
     required this.localization,
@@ -35,6 +37,7 @@ class AcupuncturePoint {
   factory AcupuncturePoint.fromJson(Map<String, dynamic> json) {
     return AcupuncturePoint(
       id: json['id'] ?? 0, // Provide a default value for id if it's null
+      fav: json['fav'] ?? false,
       name: json['name'] ?? '', // Provide a default value for name if it's null
       explication: json['explication'] ?? '',
       localization: json['localization'] ?? '',

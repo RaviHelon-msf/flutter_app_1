@@ -81,6 +81,24 @@ class _MyContPageState extends State<MyContPage> {
                 fontSize: 24, // Adjust the font size as needed
               ),
             ),
+            IconButton(
+              icon: Icon(
+                (myAppState.jsonData?[widget.myTestInput]?['fav'] ?? false)
+                    ? Icons.favorite
+                    : Icons.favorite_border,
+                color:
+                    (myAppState.jsonData?[widget.myTestInput]?['fav'] ?? false)
+                        ? Colors.red
+                        : null,
+              ),
+              onPressed: () {
+                // Toggle favorite status
+                setState(() {
+                  myAppState.jsonData?[widget.myTestInput]?['fav'] =
+                      !myAppState.jsonData?[widget.myTestInput]?['fav'];
+                });
+              },
+            ),
             SizedBox(height: 20),
             buildTextWithTags("Explicação:",
                 myAppState.jsonData?[widget.myTestInput]?['explication']),
