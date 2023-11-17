@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'my_cont_page.dart';
 import 'my_search.dart';
 import 'main.dart';
+import 'my_fav_page.dart';
 
 const String myAppTitle = "Mestre Tung";
 
@@ -109,7 +110,7 @@ class MyDrawerWidget extends StatelessWidget {
                     ),
                     onTap: () {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => MyContPage()),
+                        MaterialPageRoute(builder: (context) => MyFavPage()),
                       );
                     },
                   ),
@@ -124,7 +125,9 @@ class MyDrawerWidget extends StatelessWidget {
                       ),
                     ),
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => MyContPage()),
+                      );
                     },
                   )
                 ],

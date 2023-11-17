@@ -1,7 +1,7 @@
 {
     "chi-hu": {
         "id" : 1,
-        "is_fav" : false,
+        "fav" : false,
         "name" : "chi-hu",
         "explication": "Ch'i: Sete Hu: Tigre",
         "localization": "Estes três pontos estão localizados ao longo da diáfise distal da fibula",
@@ -21,7 +21,7 @@
     },
     "zong-san": {
         "id" : 2,
-        "is_fav" : false, 
+        "fav" : false, 
         "name": "zong-san",
         "explication": "Zong: ancestral San: três",
         "localization": "Este ponto está localizado 1 tsun acima da linha superior do maléolo medial, no terço superior da tíbia.",
@@ -41,7 +41,7 @@
     },
     "zhong-xing": {
         "id" : 3,
-        "is_fav" : false,
+        "fav" : false,
         "name" : "zhong-xing",
         "explication": "Zhong: central Xing: andar",
         "localization": "Este ponto está localizado 3 tsuns acima da linha superior do maléolo medial, no terço superior da tíbia.",

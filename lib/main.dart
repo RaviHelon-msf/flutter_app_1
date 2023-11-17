@@ -7,12 +7,14 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 
 import 'my_drawer_widget.dart';
-// ignore: unused_import
-import 'my_cont_page.dart';
+// // ignore: unused_import
+// import 'my_cont_page.dart';
 
 const String myAppTitle = 'Mestre Tung';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPreferences.getInstance();
   runApp(MyApp());
 }
 
@@ -69,9 +71,29 @@ class MyAppState extends ChangeNotifier {
   }
 
   Future<void> saveJsonData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String jsonString = json.encode(jsonData);
-    prefs.setString('myJsonData', jsonString);
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      var saveData = json.encode(jsonData);
+      await prefs.setString('jsonData', saveData);
+      print(saveData);
+      print('JSON data saved successfully');
+    } catch (e) {
+      print('Error saving JSON data: $e');
+    }
+  }
+
+  Future<void> updateJsonData() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      String? savedData = prefs.getString('jsonData');
+      if (savedData != null) {
+        jsonData = json.decode(savedData);
+        notifyListeners();
+        print('JSON data updated from SharedPreferences');
+      }
+    } catch (e) {
+      print('Error updating JSON data from SharedPreferences: $e');
+    }
   }
 }
 

@@ -45,7 +45,7 @@ class _MyContPageState extends State<MyContPage> {
   void initState() {
     super.initState();
     // Access the instance of MyAppState created by the ChangeNotifierProvider
-    Provider.of<MyAppState>(context, listen: false).loadJsonData();
+    Provider.of<MyAppState>(context, listen: false).updateJsonData();
   }
 
   @override
@@ -83,35 +83,39 @@ class _MyContPageState extends State<MyContPage> {
             ),
             IconButton(
               icon: Icon(
-                (myAppState.jsonData?[widget.myTestInput]?['fav'] ?? false)
+                (myAppState.jsonData[widget.myTestInput]?['fav'] ?? false)
                     ? Icons.favorite
                     : Icons.favorite_border,
                 color:
-                    (myAppState.jsonData?[widget.myTestInput]?['fav'] ?? false)
+                    (myAppState.jsonData[widget.myTestInput]?['fav'] ?? false)
                         ? Colors.red
                         : null,
               ),
-              onPressed: () {
+              onPressed: () async {
                 // Toggle favorite status
                 setState(() {
-                  myAppState.jsonData?[widget.myTestInput]?['fav'] =
-                      !myAppState.jsonData?[widget.myTestInput]?['fav'];
+                  myAppState.jsonData[widget.myTestInput]?['fav'] =
+                      !myAppState.jsonData[widget.myTestInput]?['fav'];
                 });
+
+                await myAppState.saveJsonData();
               },
             ),
             SizedBox(height: 20),
             buildTextWithTags("Explicação:",
-                myAppState.jsonData?[widget.myTestInput]?['explication']),
+                myAppState.jsonData[widget.myTestInput]?['explication'] ?? ''),
             buildTextWithTags("Localização:",
-                myAppState.jsonData?[widget.myTestInput]?['localization']),
+                myAppState.jsonData[widget.myTestInput]?['localization'] ?? ''),
             buildTextWithTags("Anatomia:",
-                myAppState.jsonData?[widget.myTestInput]?['anatomia']?[0]),
-            buildTextWithTags("Indicações:",
-                myAppState.jsonData?[widget.myTestInput]?['indication']?[0]),
+                myAppState.jsonData[widget.myTestInput]?['anatomia']?[0] ?? ''),
+            buildTextWithTags(
+                "Indicações:",
+                myAppState.jsonData[widget.myTestInput]?['indication']?[0] ??
+                    ''),
             buildTextWithTags("Preparação:",
-                myAppState.jsonData?[widget.myTestInput]?['preparation']),
+                myAppState.jsonData[widget.myTestInput]?['preparation'] ?? ''),
             buildTextWithTags("Procedimento:",
-                myAppState.jsonData?[widget.myTestInput]?['procedure']),
+                myAppState.jsonData[widget.myTestInput]?['procedure'] ?? ''),
           ],
         ),
       ),
